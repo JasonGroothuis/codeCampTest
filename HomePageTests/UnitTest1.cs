@@ -13,14 +13,14 @@ namespace HomePageTests
         public void TestMethod1()
         {
 
-            var driver = new ChromeDriver();
+            ChromeDriver driver = new ChromeDriver();
             driver.Url = "https://d18u5zoaatmpxx.cloudfront.net";
 
-            ReadOnlyCollection<IWebElement>? headerElements = driver.FindElements(By.TagName("h1"));
+            ReadOnlyCollection<IWebElement> headerElements = driver.FindElements(By.TagName("h1"));
 
             IWebElement foundHeader = null;
 
-            foreach (var headerElement in headerElements )
+            foreach (IWebElement headerElement in headerElements )
             {
                 if (headerElement.Text == "Web Playground")
                 {
@@ -29,7 +29,6 @@ namespace HomePageTests
                 }
             }
 
-            Thread.Sleep(1000);
             Assert.IsTrue(foundHeader.Displayed);
 
             driver.Quit();
