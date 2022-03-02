@@ -12,7 +12,7 @@ namespace HomePageTests
         public void TestMethod1()
         {
 
-            ChromeDriver driver = new ChromeDriver();
+            ChromeDriver driver = new();
             driver.Url = "https://d18u5zoaatmpxx.cloudfront.net";
 
             ReadOnlyCollection<IWebElement> headerElements = driver.FindElements(By.TagName("h1"));
