@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using OpenQA.Selenium;
 
-namespace HomePageTests
+namespace WebPlaygroundTests
 {
 	internal class HomePage
 	{
@@ -13,6 +13,11 @@ namespace HomePageTests
 		{
 			this.driver = driver;
 		}
+        public HomePage(IWebDriver driver, string url)
+        {
+            this.driver = driver;
+            this.driver.Url = url;
+        }
 
         internal bool getHeaderCalled(string v)
         {

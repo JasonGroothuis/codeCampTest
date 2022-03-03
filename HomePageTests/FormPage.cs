@@ -4,12 +4,12 @@ using OpenQA.Selenium;
 
 namespace FormPageTests
 {
-    internal class HomePage
+    internal class FormPage
     {
         IWebDriver driver;
         IWebElement popupmessage;
         IWebElement SubmitButton;
-        public HomePage(IWebDriver driver)
+        public FormPage(IWebDriver driver)
         {
             this.driver = driver;
         }
