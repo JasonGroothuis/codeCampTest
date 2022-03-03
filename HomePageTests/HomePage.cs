@@ -4,10 +4,9 @@ using OpenQA.Selenium;
 
 namespace WebPlaygroundTests
 {
-	internal class HomePage
-	{
-		IWebDriver driver;
-		IWebElement popupmessage;
+	internal class HomePage : WebPage
+    {
+        IWebElement popupmessage;
 		IWebElement SubmitButton;
 		public HomePage(IWebDriver driver)
 		{

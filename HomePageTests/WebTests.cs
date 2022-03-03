@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Threading;
 //using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
@@ -39,6 +40,18 @@ namespace WebPlaygroundTests
             HomePage homePage = new(driver, "https://d18u5zoaatmpxx.cloudfront.net/#/");
             homePage.SendForenameKeys(Name);
             Assert.AreEqual(expected: expectedPopupMessage, actual: homePage.ClickSubmitAwaitPopup() );
+        }
+        [TestMethod]
+        public void TestModernFormSubmit()
+        {
+            // Arrange
+            FormPage formPage = new(driver, "https://d18u5zoaatmpxx.cloudfront.net/#/forms");
+            // Act
+            // populate modern form fields and click submit
+            formPage.SubmitModernFormData(name: "JasonG", email: "jasong@gmail.com", state: "SA");
+
+            Thread.Sleep(5000);
+            //Assert
         }
 
     }
