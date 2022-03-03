@@ -31,11 +31,19 @@ namespace HomePageTests
 
             return false;
         }
-        public void ClickSubmitButton()
+        public string ClickSubmitAwaitPopup()
         {
+            SubmitButton = driver.FindElement(By.Id("submit"));
             SubmitButton.Click();
+            popupmessage = driver.FindElement(By.ClassName("popup-message"));
             new OpenQA.Selenium.Support.UI.WebDriverWait(driver, TimeSpan.FromSeconds(2)).Until(d => popupmessage.Displayed);
+            return popupmessage.Text;
         }
 
+        internal void SendForenameKeys(string name)
+        {
+            IWebElement foundForenameEdit = driver.FindElement(By.Id("forename"));
+            foundForenameEdit.SendKeys(name);
+        }
     }
 }

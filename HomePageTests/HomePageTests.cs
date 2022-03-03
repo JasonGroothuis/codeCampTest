@@ -11,6 +11,7 @@ namespace HomePageTests
     [TestClass]
     public class HomePageTests
     {
+        private const string Name = "JasonG";
         private const string expectedPopupMessage = "Hello JasonG";
         private IWebDriver driver;
         [TestInitialize]
@@ -27,31 +28,7 @@ namespace HomePageTests
         }
 
         [TestMethod]
-        public void TestHeader1()
-        {
-            /* 
-             * Simplify to New Homepage (driver), Assert Header GetHeaderCalled "Web Playground"
-             */
-            //driver.Url = "https://d18u5zoaatmpxx.cloudfront.net";
-
-            ReadOnlyCollection<IWebElement> headerElements = driver.FindElements(By.TagName("h1"));
-
-            IWebElement foundHeader = null;
-
-            foreach (IWebElement headerElement in headerElements)
-            {
-                if (headerElement.Text == "Web Playground")
-                {
-                    foundHeader = headerElement;
-                    break;
-                }
-            }
-
-            Assert.IsTrue(foundHeader.Displayed);
-        }
-
-        [TestMethod]
-        public void TestHeader2()
+        public void TestHeader()
         {
             HomePage homePage = new(driver);
             Assert.IsTrue(homePage.getHeaderCalled("Web Playground"));
@@ -62,7 +39,7 @@ namespace HomePageTests
  * Arrange - new Homepage, Act, Set Forename and Click Submit, Assert: wait until popup displayed popupname.text, 
  * Further simplification: New Homepage, SubmitForename & driver wait  d=> homePage.IsPopupElementDisplayed(), 
  */
-        public void TestNameSubmit()
+/*        public void TestNameSubmit()
         {
             driver.Url = "https://d18u5zoaatmpxx.cloudfront.net";
 
@@ -75,6 +52,15 @@ namespace HomePageTests
             wait.Until(d => popupElement.Displayed);
 
             string actualResult = popupElement.Text;
+            Assert.AreEqual(expected: expectedPopupMessage, actual: actualResult);
+        }*/
+        public void TestNameSubmit()
+        {
+            HomePage homePage = new(driver);
+
+            homePage.SendForenameKeys(Name);
+
+            string actualResult = homePage.ClickSubmitAwaitPopup();
             Assert.AreEqual(expected: expectedPopupMessage, actual: actualResult);
         }
 
