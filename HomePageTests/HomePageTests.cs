@@ -1,6 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
-using System.Threading;
+//using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -17,6 +17,7 @@ namespace HomePageTests
         public void Setup()
         {
             driver = new ChromeDriver();
+            driver.Url = "https://d18u5zoaatmpxx.cloudfront.net";
         }
 
         [TestCleanup]
@@ -26,9 +27,12 @@ namespace HomePageTests
         }
 
         [TestMethod]
-        public void TestHeader()
+        public void TestHeader1()
         {
-            driver.Url = "https://d18u5zoaatmpxx.cloudfront.net";
+            /* 
+             * Simplify to New Homepage (driver), Assert Header GetHeaderCalled "Web Playground"
+             */
+            //driver.Url = "https://d18u5zoaatmpxx.cloudfront.net";
 
             ReadOnlyCollection<IWebElement> headerElements = driver.FindElements(By.TagName("h1"));
 
@@ -47,6 +51,17 @@ namespace HomePageTests
         }
 
         [TestMethod]
+        public void TestHeader2()
+        {
+            HomePage homePage = new(driver);
+            Assert.IsTrue(homePage.getHeaderCalled("Web Playground"));
+        }
+
+        [TestMethod]
+/*
+ * Arrange - new Homepage, Act, Set Forename and Click Submit, Assert: wait until popup displayed popupname.text, 
+ * Further simplification: New Homepage, SubmitForename & driver wait  d=> homePage.IsPopupElementDisplayed(), 
+ */
         public void TestNameSubmit()
         {
             driver.Url = "https://d18u5zoaatmpxx.cloudfront.net";
