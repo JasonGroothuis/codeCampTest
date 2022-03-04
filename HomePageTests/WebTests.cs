@@ -14,6 +14,7 @@ namespace WebPlaygroundTests
     {
         private const string Name = "JasonG";
         private const string expectedPopupMessage = "Hello " + Name;
+        private const string expectedExploreEarthPopupMessage = "Exploring Earth";
         private IWebDriver driver;
         [TestInitialize]
         public void Setup()
@@ -47,11 +48,19 @@ namespace WebPlaygroundTests
             // Arrange
             FormPage formPage = new(driver, "https://d18u5zoaatmpxx.cloudfront.net/#/forms");
             // Act
-            // populate modern form fields and click submit
             formPage.SubmitModernFormData(name: "JasonG", email: "jasong@gmail.com", state: "SA");
-
-            Thread.Sleep(5000);
             //Assert
+            Assert.AreEqual(expected: expectedPopupMessage, actual: formPage.ClickSubmitAwaitPopup());
+
+        }
+
+        [TestMethod]
+        public void TestPlanetsExploreEarth()
+        {
+
+            PlanetsPage planetsPage = new(driver, "https://d18u5zoaatmpxx.cloudfront.net/#/planets");
+            Assert.AreEqual(expected: expectedExploreEarthPopupMessage,
+                            actual: planetsPage.ClickExploreEarthAwaitPopup());
         }
 
     }

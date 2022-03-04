@@ -6,7 +6,9 @@ namespace WebPlaygroundTests
 {
     internal class FormPage  : WebPage
     {
-
+        IWebElement popupmessage;
+        IWebElement SubmitButton;
+        IWebElement agreeCheckBox;
         public FormPage(IWebDriver driver)
         {
             this.driver = driver;
@@ -36,7 +38,22 @@ namespace WebPlaygroundTests
             SendNameKeys(name);
             SendEmailKeys(email);
             SendStateKeys(state);
+            SendAgreeClick();
+            ClickSubmitAwaitPopup();
         }
-
+        private void SendAgreeClick()
+        {
+            agreeCheckBox = driver.FindElement(By.CssSelector("label[for=agree]"));
+            agreeCheckBox.Click();
+        }
+        public string ClickSubmitAwaitPopup()
+        {
+            SubmitButton = driver.FindElement(By.Id("submit"));
+            //SubmitButton = driver.FindElement(By.CssSelector("#app > div.v-application--wrap > main > div > div > div.layout.justify-center.wrap > div > div > div.v-window.v-item-group.theme--light.v-tabs-items > div > div > div > div > form > button:nth-child(7))));
+            SubmitButton.Click();
+            popupmessage = driver.FindElement(By.ClassName("popup-message"));
+            new OpenQA.Selenium.Support.UI.WebDriverWait(driver, TimeSpan.FromSeconds(2)).Until(d => popupmessage.Displayed);
+            return popupmessage.Text;
+        }
     }
 }
