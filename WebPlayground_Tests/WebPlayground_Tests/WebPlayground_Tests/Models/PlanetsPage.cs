@@ -5,15 +5,15 @@ using WebPlayground_Tests.models.basemodel;
 
 namespace WebPlayground_Tests.models
 {
-    internal class HomePage : WebPage
+    internal class PlanetsPage : WebPage
     {
         IWebElement popupmessage;
-        IWebElement SubmitButton;
-        public HomePage(IWebDriver driver)
+        IWebElement ExploreEarthButton;
+        public PlanetsPage(IWebDriver driver)
         {
             this.driver = driver;
         }
-        public HomePage(IWebDriver driver, string url)
+        public PlanetsPage(IWebDriver driver, string url)
         {
             this.driver = driver;
             this.driver.Url = url;
@@ -35,20 +35,6 @@ namespace WebPlayground_Tests.models
             }
 
             return false;
-        }
-        internal void SendForenameKeys(string name)
-        {
-            IWebElement foundForenameEdit = driver.FindElement(By.Id("forename"));
-            foundForenameEdit.SendKeys(name);
-        }
-
-        internal string ClickSubmitAwaitPopup()
-        {
-            SubmitButton = driver.FindElement(By.Id("submit"));
-            SubmitButton.Click();
-            popupmessage = driver.FindElement(By.ClassName("popup-message"));
-            new OpenQA.Selenium.Support.UI.WebDriverWait(driver, TimeSpan.FromSeconds(2)).Until(d => popupmessage.Displayed);
-            return popupmessage.Text;
         }
     }
 }
