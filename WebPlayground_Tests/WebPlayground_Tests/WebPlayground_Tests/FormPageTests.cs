@@ -8,10 +8,13 @@ namespace WebPlayground_Tests {
     public class FormPageTests
     {
         private IWebDriver driver;
+        private FormPage formPage;
+
         [TestInitialize]
         public void Setup()
         {
             driver = new ChromeDriver();
+            formPage = new(driver, "https://d18u5zoaatmpxx.cloudfront.net/#/forms");
         }
 
         [TestCleanup]
@@ -19,6 +22,7 @@ namespace WebPlayground_Tests {
         {
             driver.Quit();
         }
+
         [TestMethod]
         public void TestModernFormSubmit()
         {
@@ -26,11 +30,9 @@ namespace WebPlayground_Tests {
             const string email = "JasonG@gmail.com";
             const string state = "SA";
             string expectedPopupMessage = $"Thanks for your feedback {name}";
-            // Arrange
-            FormPage formPage = new(driver, "https://d18u5zoaatmpxx.cloudfront.net/#/forms");
-            // Act
+
             formPage.SubmitModernFormData(name, email, state);
-            // Assert
+
             Assert.AreEqual(expected: expectedPopupMessage, actual: formPage.ClickSubmitAwaitPopup());
         }
         

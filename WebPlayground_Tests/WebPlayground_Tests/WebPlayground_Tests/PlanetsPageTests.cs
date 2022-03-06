@@ -9,10 +9,12 @@ namespace WebPlayground_Tests
     public class PlanetsPageTests
     {
         private IWebDriver driver;
+        internal  PlanetsPage planetsPage;
         [TestInitialize]
         public void Setup()
         {
             driver = new ChromeDriver();
+            planetsPage = new(driver, "https://d18u5zoaatmpxx.cloudfront.net/#/planets");
         }
 
         [TestCleanup]
@@ -24,8 +26,19 @@ namespace WebPlayground_Tests
         [TestMethod]
         public void TestPlanetsPageHeader()
         {
-            PlanetsPage planetsPage = new(driver, "https://d18u5zoaatmpxx.cloudfront.net/#/planets");
             Assert.IsTrue(planetsPage.getHeaderCalled("Planets"));
+        }
+
+        [TestMethod]
+        public void TestPlanetsPagePlanetsClassElementExists()
+        {
+            Assert.IsTrue(planetsPage.Planets.GetAttribute("class") == "planets");
+        }
+
+        [TestMethod]
+        public void TestPlanetsPagePlanetEarthCardExists()
+        {
+            Assert.IsTrue(planetsPage.GetPlanetsNames()[2] == "Earth");
         }
     }
 }

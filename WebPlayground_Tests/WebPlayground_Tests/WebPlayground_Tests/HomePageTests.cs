@@ -9,10 +9,13 @@ namespace WebPlayground_Tests
     public class HomePageTests
     {
         private IWebDriver driver;
+        HomePage homePage;
+
         [TestInitialize]
         public void Setup()
         {
             driver = new ChromeDriver();
+            homePage = new(driver, "https://d18u5zoaatmpxx.cloudfront.net/#/");
         }
 
         [TestCleanup]
@@ -24,7 +27,6 @@ namespace WebPlayground_Tests
         [TestMethod]
         public void TestHomePageHeader()
         {
-            HomePage homePage = new(driver, "https://d18u5zoaatmpxx.cloudfront.net/#/");
             Assert.IsTrue(homePage.getHeaderCalled("Web Playground"));
         }
 
@@ -33,8 +35,9 @@ namespace WebPlayground_Tests
         {
             const string Name = "JasonG";
             string expectedPopupMessage = $"Hello {Name}";
-            HomePage homePage = new(driver, "https://d18u5zoaatmpxx.cloudfront.net/#/");
+
             homePage.SendForenameKeys(Name);
+
             Assert.AreEqual(expected: expectedPopupMessage, actual: homePage.ClickSubmitAwaitPopup());
         }
     }

@@ -1,9 +1,10 @@
 ﻿using OpenQA.Selenium;
 using System;
+using WebPlayground_Tests.models.basemodel;
 
 namespace WebPlayground_Tests.models
 {
-    internal class FormPage : basemodel.WebPage
+    internal class FormPage : WebPage
     {
         IWebElement popupmessage;
         IWebElement SubmitButton;
