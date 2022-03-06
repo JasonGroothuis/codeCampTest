@@ -48,11 +48,10 @@ namespace WebPlaygroundTests
         }
         public string ClickSubmitAwaitPopup()
         {
-            SubmitButton = driver.FindElement(By.Id("submit"));
-            //SubmitButton = driver.FindElement(By.CssSelector("#app > div.v-application--wrap > main > div > div > div.layout.justify-center.wrap > div > div > div.v-window.v-item-group.theme--light.v-tabs-items > div > div > div > div > form > button:nth-child(7))));
+            SubmitButton = driver.FindElement(By.CssSelector("#app > div.v-application--wrap > main > div > div > div.layout.justify-center.wrap > div > div > div.v-window.v-item-group.theme--light.v-tabs-items > div > div > div > div > form > button:nth-child(5) > span"));
             SubmitButton.Click();
             popupmessage = driver.FindElement(By.ClassName("popup-message"));
-            new OpenQA.Selenium.Support.UI.WebDriverWait(driver, TimeSpan.FromSeconds(2)).Until(d => popupmessage.Displayed);
+            new OpenQA.Selenium.Support.UI.WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(d => popupmessage.Displayed);
             return popupmessage.Text;
         }
     }

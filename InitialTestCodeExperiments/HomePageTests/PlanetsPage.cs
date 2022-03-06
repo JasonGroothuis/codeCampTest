@@ -41,7 +41,7 @@ namespace WebPlaygroundTests
 			}
 			throw new PlanetNotFoundException();
 		}
-		internal Planet GetPlanet(Predicate<string> matchStratgey)
+		/*internal Planet GetPlanet(Predicate<string> matchStratgey)
 		{
 			foreach (var planet in GetPlanets())
 			{
@@ -52,7 +52,7 @@ namespace WebPlaygroundTests
 			}
 			throw new PlanetNotFoundException();
 		}
-
+		*/
 		internal string ClickExploreEarthAwaitPopup()
         {
 			planets = GetPlanets();

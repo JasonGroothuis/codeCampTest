@@ -14,6 +14,7 @@ namespace WebPlaygroundTests
     {
         private const string Name = "JasonG";
         private const string expectedPopupMessage = "Hello " + Name;
+        private const string expectedModernFormPopupMessage = "Thanks for your feedback JasonG";
         private const string expectedExploreEarthPopupMessage = "Exploring Earth";
         private IWebDriver driver;
         [TestInitialize]
@@ -50,7 +51,7 @@ namespace WebPlaygroundTests
             // Act
             formPage.SubmitModernFormData(name: "JasonG", email: "jasong@gmail.com", state: "SA");
             //Assert
-            Assert.AreEqual(expected: expectedPopupMessage, actual: formPage.ClickSubmitAwaitPopup());
+            Assert.AreEqual(expected: expectedModernFormPopupMessage, actual: formPage.ClickSubmitAwaitPopup());
 
         }
 
