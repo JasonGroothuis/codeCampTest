@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
+using System;
 
-namespace WebPlaygroundTests
+namespace WebPlayground_Tests.models
 {
-    internal class FormPage  : WebPage
+    internal class FormPage : basemodel.WebPage
     {
         IWebElement popupmessage;
         IWebElement SubmitButton;
         IWebElement agreeCheckBox;
+
         public FormPage(IWebDriver driver)
         {
             this.driver = driver;
@@ -33,14 +33,6 @@ namespace WebPlaygroundTests
             IWebElement foundStateEdit = driver.FindElement(By.Id("state"));
             foundStateEdit.SendKeys(state);
         }
-        internal void SubmitModernFormData(string name, string email, string state)
-        {
-            SendNameKeys(name);
-            SendEmailKeys(email);
-            SendStateKeys(state);
-            SendAgreeClick();
-            ClickSubmitAwaitPopup();
-        }
         private void SendAgreeClick()
         {
             agreeCheckBox = driver.FindElement(By.CssSelector("label[for=agree]"));
@@ -53,6 +45,14 @@ namespace WebPlaygroundTests
             popupmessage = driver.FindElement(By.ClassName("popup-message"));
             new OpenQA.Selenium.Support.UI.WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(d => popupmessage.Displayed);
             return popupmessage.Text;
+        }
+        internal void SubmitModernFormData(string name, string email, string state)
+        {
+            SendNameKeys(name);
+            SendEmailKeys(email);
+            SendStateKeys(state);
+            SendAgreeClick();
+            ClickSubmitAwaitPopup();
         }
     }
 }
